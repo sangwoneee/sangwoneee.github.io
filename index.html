@@ -1,7 +1,611 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Personal website for Sangwon Lee with a brief profile, project summary, CV, and contact links."
+    >
+    <title>Sangwon Lee</title>
+    <style>
+      :root {
+        --ink: #181d26;
+        --body: #333840;
+        --muted: #41454d;
+        --hairline: #dddddd;
+        --canvas: #ffffff;
+        --surface-soft: #f8fafc;
+        --surface-dark-elevated: #1d1f25;
+        --signature-peach: #fcab79;
+        --link: #1b61c9;
+        --focus: #458fff;
+        --on-dark: #ffffff;
+        --max-width: 1120px;
+        color-scheme: light;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        padding-right: 180px;
+        background: var(--canvas);
+        color: var(--body);
+        font-family:
+          "Haas", "Inter", "Helvetica Neue", Arial, system-ui, sans-serif;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      a {
+        color: var(--link);
+        text-decoration-thickness: 1px;
+        text-underline-offset: 0.22em;
+      }
+
+      a:hover {
+        color: #1a3866;
+      }
+
+      a:focus-visible,
+      button:focus-visible {
+        outline: 3px solid var(--focus);
+        outline-offset: 4px;
+      }
+
+      .skip-link {
+        position: absolute;
+        left: 16px;
+        top: 12px;
+        z-index: 20;
+        transform: translateY(-140%);
+        border-radius: 6px;
+        background: var(--ink);
+        color: #ffffff;
+        padding: 10px 14px;
+      }
+
+      .skip-link:focus {
+        transform: translateY(0);
+      }
+
+      .site-header {
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 10;
+        width: 180px;
+        height: 100%;
+        border-left: 1px solid var(--hairline);
+        background: var(--canvas);
+      }
+
+      .nav {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 36px 0;
+      }
+
+      .brand {
+        color: var(--ink);
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0;
+        text-decoration: none;
+        padding: 0 24px;
+        margin-bottom: 40px;
+      }
+
+      .nav-links {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 2px;
+        margin: 0;
+        padding: 0 12px;
+        list-style: none;
+        width: 100%;
+      }
+
+      .nav-links a {
+        display: flex;
+        min-height: 40px;
+        align-items: center;
+        border-radius: 8px;
+        color: var(--muted);
+        font-size: 14px;
+        padding: 8px 12px;
+        text-decoration: none;
+      }
+
+      .nav-links a:hover {
+        background: var(--surface-soft);
+        color: var(--ink);
+      }
+
+      main {
+        overflow: hidden;
+      }
+
+      .section {
+        border-bottom: 1px solid var(--hairline);
+      }
+
+      .wrap {
+        width: min(100% - 48px, var(--max-width));
+        margin: 0 auto;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.72fr);
+        gap: clamp(32px, 7vw, 88px);
+        align-items: center;
+        min-height: 100svh;
+        padding: clamp(56px, 9vw, 96px) 0;
+      }
+
+      .eyebrow {
+        margin: 0 0 16px;
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0.16px;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        max-width: 760px;
+        margin-bottom: 24px;
+        color: var(--ink);
+        font-size: clamp(36px, 5vw, 48px);
+        font-weight: 400;
+        line-height: 1.1;
+        letter-spacing: 0;
+      }
+
+      .lede {
+        max-width: 650px;
+        margin-bottom: 32px;
+        color: var(--body);
+        font-size: clamp(18px, 2.2vw, 24px);
+        line-height: 1.35;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .button {
+        display: inline-flex;
+        min-height: 52px;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--ink);
+        border-radius: 12px;
+        padding: 16px 24px;
+        font-size: 16px;
+        font-weight: 500;
+        text-decoration: none;
+      }
+
+      .button.primary {
+        background: var(--ink);
+        color: #ffffff;
+      }
+
+      .button.primary:hover {
+        background: #0d1218;
+        color: #ffffff;
+      }
+
+      .button.secondary {
+        background: var(--canvas);
+        color: var(--ink);
+      }
+
+      .button.secondary:hover {
+        background: var(--surface-soft);
+        color: var(--ink);
+      }
+
+      .portrait-panel {
+        display: grid;
+        gap: 16px;
+      }
+
+      .portrait {
+        overflow: hidden;
+        border: 1px solid var(--hairline);
+        border-radius: 12px;
+        background: var(--surface-soft);
+      }
+
+      .portrait img {
+        width: 100%;
+        aspect-ratio: 3 / 4;
+        object-fit: cover;
+      }
+
+      .section-inner {
+        padding: 96px 0;
+      }
+
+      .section-heading {
+        display: grid;
+        grid-template-columns: minmax(180px, 0.35fr) minmax(0, 1fr);
+        gap: 32px;
+        align-items: start;
+        margin-bottom: 40px;
+      }
+
+      h2 {
+        margin-bottom: 16px;
+        color: var(--ink);
+        font-size: clamp(28px, 4vw, 40px);
+        font-weight: 400;
+        line-height: 1.2;
+        letter-spacing: 0;
+      }
+
+      .section-heading > div > p {
+        max-width: 700px;
+        margin-bottom: 0;
+        color: var(--body);
+        font-size: 20px;
+        line-height: 1.5;
+      }
+
+      .fact-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .fact-card {
+        border: 1px solid var(--hairline);
+        border-radius: 12px;
+        background: var(--surface-soft);
+        padding: 32px;
+      }
+
+      .fact-card h3 {
+        margin-bottom: 8px;
+        color: var(--ink);
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      .fact-card p {
+        margin-bottom: 0;
+      }
+
+      .cv-band {
+        background: var(--signature-cream);
+      }
+
+      .cv {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 32px;
+        align-items: center;
+      }
+
+      .cv h2 {
+        margin-bottom: 0;
+      }
+
+      .contact-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(260px, 0.65fr);
+        gap: clamp(32px, 7vw, 80px);
+        align-items: start;
+      }
+
+      .contact-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .section-soft {
+        background: var(--surface-soft);
+      }
+
+      .section-dark {
+        background: var(--ink);
+        border-bottom-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .section-dark .eyebrow {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .section-dark h2 {
+        color: var(--on-dark);
+      }
+
+      .contact-card-on-dark {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        background: var(--surface-dark-elevated);
+        padding: 24px;
+      }
+
+      .contact-card-on-dark h3 {
+        margin-bottom: 8px;
+        color: var(--on-dark);
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      .contact-card-on-dark p {
+        margin-bottom: 0;
+      }
+
+      .contact-card-on-dark a {
+        color: #79a8ff;
+      }
+
+      .site-footer {
+        padding: 32px 0;
+        background: var(--canvas);
+        color: var(--body);
+        font-size: 14px;
+      }
+
+      @media (max-width: 780px) {
+        body {
+          padding-right: 0;
+        }
+
+        .site-header {
+          position: static;
+          width: 100%;
+          height: auto;
+          border-left: none;
+          border-bottom: 1px solid var(--hairline);
+        }
+
+        .nav {
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          min-height: 56px;
+          height: auto;
+          padding: 0;
+          width: min(100% - 32px, var(--max-width));
+          margin: 0 auto;
+        }
+
+        .brand {
+          padding: 0;
+          margin-bottom: 0;
+        }
+
+        .nav-links {
+          flex-direction: row;
+          flex-wrap: nowrap;
+          align-items: center;
+          width: auto;
+          padding: 0;
+          gap: 2px;
+        }
+
+        .nav-links a {
+          min-height: 40px;
+          color: var(--muted);
+          padding: 8px 10px;
+        }
+
+        .hero,
+        .section-heading,
+        .cv {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          min-height: auto;
+        }
+
+        .portrait-panel {
+          max-width: 420px;
+        }
+
+        .section-inner {
+          padding: 64px 0;
+        }
+
+        .wrap {
+          width: min(100% - 32px, var(--max-width));
+        }
+
+        .fact-list,
+        .contact-layout {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 460px) {
+        .wrap {
+          width: min(100% - 24px, var(--max-width));
+        }
+
+        .nav {
+          width: min(100% - 24px, var(--max-width));
+        }
+
+        .nav-links {
+          flex-wrap: wrap;
+          justify-content: flex-end;
+        }
+
+        .button {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
   <body>
-    <h1>Welcome my personal Page</h1>
-    <p>Hosted on Github Pages!</p>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="#">Sangwon Lee</a>
+        <ul class="nav-links">
+          <li><a href="#about-me">About Me</a></li>
+          <li><a href="#project">Projects</a></li>
+          <li><a href="#cv">CV</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="section">
+        <div class="wrap hero">
+          <div>
+            <p class="eyebrow">Personal website</p>
+            <h1>Sangwon Lee</h1>
+            <p class="lede">
+              A concise home for my profile, project summary, CV, and contact
+              links.
+            </p>
+            <div class="actions" aria-label="Primary actions">
+              <a class="button primary" href="assets/cv.pdf">View CV</a>
+              <a class="button secondary" href="#contact">Contact</a>
+            </div>
+          </div>
+
+          <div class="portrait-panel" aria-label="Profile">
+            <figure class="portrait">
+              <img
+                src="assets/profile.jpg"
+                alt="Portrait of Sangwon Lee"
+                width="398"
+                height="531"
+              >
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-soft" id="about-me" aria-labelledby="about-me-title">
+        <div class="wrap section-inner">
+          <div class="section-heading">
+            <p class="eyebrow">About Me</p>
+            <div>
+              <h2 id="about-me-title">I am Sangwon Lee.</h2>
+              <p>
+                I am an undergraduate at Seoul National University studying
+                Aerospace Engineering, Computer Science &amp; Engineering, and
+                Mathematics.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="project" aria-labelledby="project-title">
+        <div class="wrap section-inner">
+          <div class="section-heading">
+            <p class="eyebrow">Projects</p>
+            <div>
+              <h2 id="project-title">Projects at the intersection of algorithms, machine learning, and systems.</h2>
+              <p>
+                Selected course projects are summarized below. More detailed
+                descriptions are available in my CV.
+              </p>
+            </div>
+          </div>
+
+          <div class="fact-list" aria-label="Course projects">
+            <article class="fact-card">
+              <h3>Distributed Optimization for LLM Inference</h3>
+              <p>
+                In Scalable High-Performance Computing, I optimized inference
+                for an 8B-parameter LLM across multi-node CPU/GPU systems using
+                MPI, OpenMP, SIMD, and CUDA.
+              </p>
+            </article>
+            <article class="fact-card">
+              <h3>ARC-AGI Reasoning Challenge</h3>
+              <p>
+                In Introduction to Deep Learning, I designed few-shot abstract
+                reasoning strategies and achieved 1st place in the course-wide
+                competition.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section cv-band" id="cv" aria-labelledby="cv-title">
+        <div class="wrap section-inner cv">
+          <div>
+            <p class="eyebrow">CV</p>
+            <h2 id="cv-title">Open the current CV.</h2>
+          </div>
+          <a class="button primary" href="assets/cv.pdf">Open CV PDF</a>
+        </div>
+      </section>
+
+      <section class="section section-dark" id="contact" aria-labelledby="contact-title">
+        <div class="wrap section-inner">
+          <div class="contact-layout">
+            <div>
+              <p class="eyebrow">Contact</p>
+              <h2 id="contact-title">Find me online.</h2>
+            </div>
+            <div class="contact-stack">
+              <article class="contact-card-on-dark">
+                <h3>Email</h3>
+                <p>
+                  <a href="mailto:swlee3722@snu.ac.kr">swlee3722@snu.ac.kr</a>
+                </p>
+              </article>
+              <article class="contact-card-on-dark">
+                <h3>GitHub</h3>
+                <p>
+                  <a href="https://github.com/sangwoneee">github.com/sangwoneee</a>
+                </p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <span>&copy; 2026 Sangwon Lee.</span>
+      </div>
+    </footer>
   </body>
 </html>
